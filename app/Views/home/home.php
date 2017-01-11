@@ -19,4 +19,5 @@
       <li><a href="User/Signin">Sign In</a></li>
     </ul>
 	</div>
+
 <?php $this->stop('main_content') ?>
