@@ -15,8 +15,12 @@
 		<section>
 			<?= $this->section('main_content') ?>
 		</section>
+		<section>
+			<?= $this->section('aRemplir') ?>
+		</section>
 
 		<footer>
+			<?= $this->section('footer') ?>
 		</footer>
 	</div>
 </body>

@@ -21,7 +21,12 @@ class ArticleController extends Controller
   //Affiche la page voir
   public function Voir() {
 
-    $this->show('article/voir', ["articleTrois" => "<p>testlayout", "articleQuatre" => "testDeux</p>"]);
+    $this->show('article/voir',
+    [
+      //Possibilité d'ajout de variable accessible par des variables dans la page ou la method est appeler
+      "articleTrois" => "<p>testlayout",
+      "articleQuatre" => "testDeux</p>"
+    ]);
   }
 
 }
