@@ -14,7 +14,17 @@
 		</ul>
     <h3>User</h3>
     <ul>
-      <li><a href="User/Login">Login</a></li>
+      <li><a href="User/Login">
+
+				<?php
+				//On change le message afficher en cas de connection ou de deconnection
+				if (empty($_SESSION['user'])) { ?>
+					Login
+				<?php } else { ?>
+					Disconnect
+				<?php } ?>
+
+			</a></li>
       <li><a href="User/Update">Update</a></li>
       <li><a href="User/Signin">Sign In</a></li>
     </ul>

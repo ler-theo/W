@@ -10,7 +10,7 @@
 		['GET', '/Article/Voir', 'Article#Voir', 'article_voir'],
 
 		//User
-		['GET', '/User/Signin', 'User#Signin', 'user_signin'],
-		['GET', '/User/Login', 'User#Login', 'user_login'],
+		['GET|POST', '/User/Signin', 'User#Signin', 'user_signin'],
+		['GET|POST', '/User/Login', 'User#Login', 'user_login'],
 		['GET', '/User/Update', 'User#Update', 'user_update']
 	);
