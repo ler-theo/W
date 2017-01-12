@@ -26,8 +26,6 @@
 
 </form>
 
-<p><a href="<?= $this -> url('default_home') ?>">Retour à l'acceuil</a></p>
-
 <?php } elseif (!empty($_SESSION['user'])) { ?>
 
   <h1>Se deconnecter</h1>
@@ -38,8 +36,8 @@
 
   </form>
 
-  <p><a href="<?= $this -> url('default_home') ?>">Retour à l'acceuil</a></p>
 
 <?php } ?>
+<p><a href="<?= $this -> url('default_home') ?>">Retour à l'acceuil</a></p>
 
 <?php $this->stop('main_content') ?>
