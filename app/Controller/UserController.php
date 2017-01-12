@@ -65,21 +65,32 @@ class UserController extends \W\Controller\Controller
     //On verifie que l'utilisateur n'est pas connecter
     if (empty($_SESSION['user'])) {
 
-      //S'il n'est pas conencter on verifie que $_POST n'est pas vide
-      if (!empty($_POST['singin'])) {
+      //Instance de userModel
 
-        //Instance du model "ConenctModel"
-        $log = new ConnectModel();
-        //utilisation de la method "disconnect()"
-        $confirm = $log -> inscription();
+        //S'il n'est pas conencter on verifie que $_POST n'est pas vide
+        if (!empty($_POST['singin'])) {
 
-        //la method "inscription()" return true or false, se qui permet d'afficher un message
-        if ($confirm) {
-          echo "Inscription reussi";
+          $getUser = new UsersModel();
+          //Verification que l'email est present dans la BDD
+          $getUser2 = $getUser -> getUserByUsernameOrEmail($_POST['email']);
+
+          if (!$getUser2) {
+
+            //Instance du model "ConenctModel"
+            $log = new ConnectModel();
+            //utilisation de la method "disconnect()"
+            $confirm = $log -> inscription();
+
+          //la method "inscription()" return true or false, se qui permet d'afficher un message
+          if ($confirm) {
+            echo "Inscription reussi";
+          } else {
+            echo "Echec de l'inscription";
+          }
+
         } else {
-          echo "Echec de l'inscription";
+          Echo 'Cette email est deja pris !';
         }
-
       }
 
     }

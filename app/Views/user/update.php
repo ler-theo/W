@@ -1,5 +1,12 @@
 <?php $this->layout('layout', ['title' => 'Accueil']) ?>
 
 <?php $this->start('main_content') ?>
-<p>C'est la page user/update</p>
+
+<?php if (!empty($_SESSION['user'])) {?>
+  
+<?php } else { ?>
+
+<?php } ?>
+
+
 <?php $this->stop('main_content') ?>
