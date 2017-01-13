@@ -64,26 +64,33 @@ class UserModel extends \W\Model\UsersModel
     //On verifie que les données existe
     if (!empty($_POST['username']) && !empty($_POST['email']) &&!empty($_POST['role'])) {
 
-      //On Instance le model Model
+      //On Instance le model UserModel pour acceder au method du model abstrait Model dans le noyeau
       $model = new UserModel();
-      //On definie la table a utilisé
-      
 
+      //Création d'un tableau pour la method update()
       $arrayData = array(
         "username" => $_POST['username'],
         "email" => $_POST['email'],
         "role" => $_POST['role'],
       );
 
-      $test = $model -> update($arrayData, $_SESSION['user']['id'], $stripTags = true);
+      //utilisation de la mathod update()
+      $confirmUpdate = $model -> update($arrayData, $_SESSION['user']['id'], $stripTags = true);
 
-      if ($test) {
+      //Echo d'un message pour confirmer l'update
+      if ($confirmUpdate) {
+
         echo 'User Win';
+
+        //Mise a jour de la session avec les nouvelles info
+        $_SESSION['user']['username'] = $_POST['username'];
+        $_SESSION['user']['email'] = $_POST['email'];
+        $_SESSION['user']['role'] = $_POST['role'];
+
       } else {
         echo 'user loose';
       }
     }
-
 
   }
 
