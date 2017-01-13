@@ -21,10 +21,15 @@ class ArticleController extends Controller
 
       //On verifie le resultat
       if ($insertSucces) {
+
         echo 'Insertion reussie';
+
       } else {
+
         echo 'Echec de l\'insertion';
+
       }
+
     }
 
 
@@ -40,12 +45,21 @@ class ArticleController extends Controller
   //Affiche la page voir
   public function Voir() {
 
-    $this->show('article/voir',
-    [
-      //Possibilité d'ajout de variable accessible par des variables dans la page ou la method est appeler
-      "articleTrois" => "<p>testlayout",
-      "articleQuatre" => "testDeux</p>"
-    ]);
+    //Instance de ArticleModel
+    $model = new ArticleModel();
+
+    //Appel de la method pour afficher les article
+    $showArticle = $model -> showArticle();
+
+
+    for ($i=0; $i < count($showArticle) ; $i++) {
+
+      echo $showArticle[$i]['contenue'];
+
+    }
+    
+    //Affichage de l'article
+    $this->show('article/voir');
   }
 
 }

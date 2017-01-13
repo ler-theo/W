@@ -14,6 +14,8 @@ class ArticleModel extends \W\Model\Model
     //On verifie que les infos recont sont remplie
     if (!empty($_POST['contenue'])) {
 
+      var_dump($_POST['contenue']);
+
       //On instancie le model ArticleModel pour accerder aux methods de Model
       $model = new ArticleModel();
 
@@ -26,7 +28,7 @@ class ArticleModel extends \W\Model\Model
       );
 
       //On Insert les données en BDD
-      $model -> insert($arrayData, $stripTags = true);
+      $model -> insert($arrayData, $stripTags = false);
 
       //On return true
       return true;
@@ -36,4 +38,17 @@ class ArticleModel extends \W\Model\Model
     }
   }
 
+  public function showArticle() {
+
+    //instance du model ArticleModel pour accerder au fonction du noyeau
+    $model = new ArticleModel();
+
+    //On definie le nom de la table
+    $model -> setTable('w_article');
+
+
+    $article = $model -> findAll($orderBy = 'id', $orderDir = 'ASC', $limit = null, $offset = null);
+
+    return $article;
+  }
 }
