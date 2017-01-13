@@ -27,11 +27,12 @@ class ArticleModel extends \W\Model\Model
         "contenue" => $_POST['contenue']
       );
 
-      //On Insert les données en BDD
+      //On Insert les données en BDD, passer la valeur a false pour garder les balise html
       $model -> insert($arrayData, $stripTags = false);
 
       //On return true
       return true;
+      
     } else {
       echo 'Veuillez remplir tout les champs';
       return false;

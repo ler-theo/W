@@ -2,6 +2,6 @@
 
 <?php $this->start('main_content') ?>
 
-<p><?php  ?></p>
+<p><a href="<?= $this -> url('default_home') ?>">Retour à l'acceuil</a></p>
 
 <?php $this->stop('main_content') ?>

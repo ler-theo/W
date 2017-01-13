@@ -19,15 +19,11 @@ class ArticleController extends Controller
       //On appel la method articleWritten
       $insertSucces = $model -> articleWritten();
 
-      //On verifie le resultat
+      //On verifie le resultat et on echo un msg en fonction de la reponse
       if ($insertSucces) {
-
         echo 'Insertion reussie';
-
       } else {
-
         echo 'Echec de l\'insertion';
-
       }
 
     }
@@ -54,10 +50,10 @@ class ArticleController extends Controller
 
     for ($i=0; $i < count($showArticle) ; $i++) {
 
-      echo $showArticle[$i]['contenue'];
+      echo "<textarea name='contenue' rows='10' cols='100'> " . $showArticle[$i]['contenue'] . "</textarea>";
 
     }
-    
+
     //Affichage de l'article
     $this->show('article/voir');
   }
