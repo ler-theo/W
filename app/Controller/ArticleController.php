@@ -45,17 +45,14 @@ class ArticleController extends Controller
     $model = new ArticleModel();
 
     //Appel de la method pour afficher les article
-    $showArticle = $model -> showArticle();
+    $article = $model -> showArticle();
 
-
-    for ($i=0; $i < count($showArticle) ; $i++) {
-
-      echo "<textarea name='contenue' rows='10' cols='100'> " . $showArticle[$i]['contenue'] . "</textarea>";
+    //Affichage de l'article
+    $this->show('article/voir',
+    [
+      "article" => $article,
+    ]);
 
     }
 
-    //Affichage de l'article
-    $this->show('article/voir');
   }
-
-}

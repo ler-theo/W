@@ -32,7 +32,7 @@ class ArticleModel extends \W\Model\Model
 
       //On return true
       return true;
-      
+
     } else {
       echo 'Veuillez remplir tout les champs';
       return false;
@@ -48,8 +48,30 @@ class ArticleModel extends \W\Model\Model
     $model -> setTable('w_article');
 
 
-    $article = $model -> findAll($orderBy = 'id', $orderDir = 'ASC', $limit = null, $offset = null);
+    $article = $model -> findAll();
 
-    return $article;
+    //utilisation de la boucle pour afficher les different commentaire
+    for ($i=0; $i < count($article) ; $i++) {
+
+      if (empty($articleList)) {
+
+        $articleList = "<form action='' method='post'>
+        <textarea name='contenue' rows='10' cols='100'>"
+         . $article[$i]['contenue']
+         . "</textarea>
+         <input type='submit' name='updateArticle' value='Envoyer'>
+         </form>";
+
+      } elseif (!empty($articleList)) {
+
+        $articleList .= "<form action='' method='post'>
+        <textarea name='contenue' rows='10' cols='100'>"
+         . $article[$i]['contenue']
+         . "</textarea>
+         <input type='submit' name='updateArticle' value='Envoyer'>
+         </form>";
+      }
+    }
+    return $articleList;
   }
 }
