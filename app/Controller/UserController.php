@@ -44,7 +44,7 @@ class UserController extends \W\Controller\Controller
 
 
   //Affiche la page update
-  public function UpdateUser() {
+  public function Update() {
     //on verifie si les données envoyer son presante
     if (!empty($_POST['updateUser'])) {
 
@@ -54,7 +54,7 @@ class UserController extends \W\Controller\Controller
       $userModel -> updateUser();
 
     }
-
+    var_dump($_SESSION);
     $this->show('user/update');
   }
 

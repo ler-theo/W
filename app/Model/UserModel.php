@@ -62,13 +62,26 @@ class UserModel extends \W\Model\UsersModel
   public function updateUser() {
 
     //On verifie que les données existe
-    if (!empty($_POST['username']) && !empty($_POST['email']) &&!empty($_POST['password']) &&!empty($_POST['role'])) {
+    if (!empty($_POST['username']) && !empty($_POST['email']) &&!empty($_POST['role'])) {
 
       //On Instance le model Model
-      $model = new Model();
+      $model = new UserModel();
       //On definie la table a utilisé
-      $model -> setTable('w_user');
+      
 
+      $arrayData = array(
+        "username" => $_POST['username'],
+        "email" => $_POST['email'],
+        "role" => $_POST['role'],
+      );
+
+      $test = $model -> update($arrayData, $_SESSION['user']['id'], $stripTags = true);
+
+      if ($test) {
+        echo 'User Win';
+      } else {
+        echo 'user loose';
+      }
     }
 
 

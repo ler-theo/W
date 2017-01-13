@@ -2,8 +2,7 @@
 
 <?php $this->start('main_content') ?>
 
-<?php if (!empty($_SESSION['user'])) {
-  var_dump($_SESSION);?>
+<?php if (!empty($_SESSION['user'])) { ?>
 
 <form action="<?= $this -> url('user_update') ?>" method="post">
 
@@ -20,12 +19,6 @@
   </p>
 
   <p>
-    <label for="password">Password :
-      <input type="password" name="password" value="">
-    </label>
-  </p>
-
-  <p>
     <label for="role">Role :
       <input type="text" name="role" value="<?php echo $_SESSION['user']['role'] ?>">
     </label>
@@ -37,7 +30,7 @@
 
 <?php } else { ?>
 
-  <p>Veuillez vous connecter Connard de Paella</p>
+  <p>Veuillez vous connecter</p>
 
 <?php } ?>
 
