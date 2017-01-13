@@ -100,33 +100,50 @@ class UserModel extends \W\Model\UsersModel
     //Verification que les champs sont tous remplie
     if (!empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['role'])) {
 
-      //On Instance le model UserModel pour acceder au method du model abstrait Model dans le noyeau
-      $model = new UserModel();
+      //On instancie le model UsersModel
+      $modelVerif = new UsersModel();
 
-      //On instance le model AuthentificationModel
-      $modelHash = new AuthentificationModel();
-
-      //Hashage du password avent l'insertion
-      $passwordHash = $modelHash -> hashPassword($_POST['password']);
-
-      //Definition d'un tableau pour definir les champs a remplir en BDD
-      $arrayData = array(
-        "username" => $_POST['username'],
-        "email" => $_POST['email'],
-        "password" => $passwordHash,
-        "role" => $_POST['role'],
-      );
-
-      //Utilisation de la method insert pour ajouter l'utilisateur en BDD
-      $insertUser = $model -> insert($arrayData, $stripTags = true);
-
-      if ($insertUser) {
-        echo 'Win !';
+      //On verifie que l'email n'est pas deja present en base de données avec la method emailExists
+      $testEmail = $modelVerif -> emailExists($_POST['email']);
+      if ($testEmail) {
+        echo 'Email deja utiliser';
       } else {
-        echo 'Losse !';
+
+        //On verifie que l'username n'est pas deja prit en BDD avec la method usernameExistst
+        $testSpeudo = $modelVerif -> usernameExists($_POST['username']);
+
+        if ($testSpeudo) {
+          echo 'Username deja utilisé';
+        } else {
+
+          //On Instance le model UserModel pour acceder au method du model abstrait Model dans le noyeau
+          $model = new UserModel();
+
+          //On instance le model AuthentificationModel
+          $modelHash = new AuthentificationModel();
+
+          //Hashage du password avent l'insertion
+          $passwordHash = $modelHash -> hashPassword($_POST['password']);
+
+          //Definition d'un tableau pour definir les champs a remplir en BDD
+          $arrayData = array(
+            "username" => $_POST['username'],
+            "email" => $_POST['email'],
+            "password" => $passwordHash,
+            "role" => $_POST['role'],
+          );
+
+          //Utilisation de la method insert pour ajouter l'utilisateur en BDD
+          $insertUser = $model -> insert($arrayData, $stripTags = true);
+
+          if ($insertUser) {
+            echo 'Win !';
+          } else {
+            echo 'Losse !';
+          }
+        }
       }
     }
-
   }
 
 }
