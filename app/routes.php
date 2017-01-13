@@ -5,7 +5,7 @@
 		['GET', '/', 'Default#home', 'default_home'],
 
 		//Article
-		['GET', '/Article/Written', 'Article#Written', 'article_written'],
+		['GET|POST', '/Article/Written', 'Article#Written', 'article_written'],
 		['GET', '/Article/Update', 'Article#Update', 'article_update'],
 		['GET', '/Article/Voir', 'Article#Voir', 'article_voir'],
 
