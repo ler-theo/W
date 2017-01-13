@@ -82,17 +82,51 @@ class UserModel extends \W\Model\UsersModel
 
         echo 'User Win';
 
-        //Mise a jour de la session avec les nouvelles info
-        $_SESSION['user']['username'] = $_POST['username'];
-        $_SESSION['user']['email'] = $_POST['email'];
-        $_SESSION['user']['role'] = $_POST['role'];
+        //Instance de AuthentificationModel
+        $refreshModel = new AuthentificationModel();
+
+        //utilisation de la method pour mettre a jours la session
+        $refreshModel -> refreshUser();
 
       } else {
-        echo 'user loose';
+        echo 'User loose';
+      }
+    }
+  }
+
+  //Création d'un nouvelle utilisateur
+  public function Singin() {
+
+    //Verification que les champs sont tous remplie
+    if (!empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['role'])) {
+
+      //On Instance le model UserModel pour acceder au method du model abstrait Model dans le noyeau
+      $model = new UserModel();
+
+      //On instance le model AuthentificationModel
+      $modelHash = new AuthentificationModel();
+
+      //Hashage du password avent l'insertion
+      $passwordHash = $modelHash -> hashPassword($_POST['password']);
+
+      //Definition d'un tableau pour definir les champs a remplir en BDD
+      $arrayData = array(
+        "username" => $_POST['username'],
+        "email" => $_POST['email'],
+        "password" => $passwordHash,
+        "role" => $_POST['role'],
+      );
+
+      //Utilisation de la method insert pour ajouter l'utilisateur en BDD
+      $insertUser = $model -> insert($arrayData, $stripTags = true);
+
+      if ($insertUser) {
+        echo 'Win !';
+      } else {
+        echo 'Losse !';
       }
     }
 
   }
-
 
 }

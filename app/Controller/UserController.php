@@ -54,14 +54,24 @@ class UserController extends \W\Controller\Controller
       $userModel -> updateUser();
 
     }
-    var_dump($_SESSION);
+
+    //Affichage de la page update
     $this->show('user/update');
   }
 
-  //Affiche la page signin
   public function Signin() {
 
+    //Verification que $_POST n'est pas vide
+    if (!empty($_POST['singin'])) {
 
+      //On instancie le model UserModel
+      $userModel = new UserModel();
+
+      //On appel la function singin
+      $userModel -> singin();
+    }
+
+    //Affiche la page signin
     $this->show('user/signin');
   }
 }
